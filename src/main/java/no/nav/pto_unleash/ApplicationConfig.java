@@ -26,7 +26,7 @@ public class ApplicationConfig {
     public UnleashService unleashService() {
         return new UnleashService(UnleashServiceConfig.builder()
                 .applicationName(requireApplicationName())
-                .unleashApiUrl("https://unleash.nais.adeo.no/api/")
+                .unleashApiUrl("https://unleash.nais.io/api/")
                 .build()
         );
     }
