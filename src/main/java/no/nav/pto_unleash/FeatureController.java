@@ -4,7 +4,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
 import lombok.extern.slf4j.Slf4j;
 import no.finn.unleash.UnleashContext;
-import no.nav.common.featuretoggle.UnleashService;
+import no.nav.common.featuretoggle.UnleashClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +33,11 @@ public class FeatureController {
             OPEN_AM_ID_TOKEN_COOKIE_NAME, AZURE_AD_ID_TOKEN_COOKIE_NAME, AZURE_AD_B2C_ID_TOKEN_COOKIE_NAME
     );
 
-    private final UnleashService unleashService;
+    private final UnleashClient unleashClient;
 
     @Autowired
-    public FeatureController(UnleashService unleashService) {
-        this.unleashService = unleashService;
+    public FeatureController(UnleashClient unleashClient) {
+        this.unleashClient = unleashClient;
     }
 
     @GetMapping
@@ -59,7 +59,7 @@ public class FeatureController {
                 .remoteAddress(request.getRemoteAddr())
                 .build();
 
-        return features.stream().collect(Collectors.toMap(e -> e, e -> unleashService.isEnabled(e, unleashContext)));
+        return features.stream().collect(Collectors.toMap(e -> e, e -> unleashClient.isEnabled(e, unleashContext)));
     }
 
     private static Optional<String> findFirstSubject(List<String> tokenCookieNames, HttpServletRequest request) {

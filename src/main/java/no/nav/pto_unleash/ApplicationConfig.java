@@ -1,17 +1,16 @@
 package no.nav.pto_unleash;
 
-import no.nav.common.featuretoggle.UnleashService;
-import no.nav.common.featuretoggle.UnleashServiceConfig;
+import no.nav.common.featuretoggle.UnleashClient;
+import no.nav.common.featuretoggle.UnleashClientImpl;
 import no.nav.common.rest.filter.SetStandardHttpHeadersFilter;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static no.nav.common.utils.EnvironmentUtils.requireApplicationName;
-
 @Configuration
 public class ApplicationConfig {
+
+    private final String APPLICATION_NAME = "pto-unleash";
 
     @Bean
     public FilterRegistrationBean<SetStandardHttpHeadersFilter> setStandardHttpHeadersFilter() {
@@ -23,12 +22,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public UnleashService unleashService() {
-        return new UnleashService(UnleashServiceConfig.builder()
-                .applicationName(requireApplicationName())
-                .unleashApiUrl("https://unleash.nais.io/api/")
-                .build()
-        );
+    public UnleashClient unleashClient() {
+        return new UnleashClientImpl("https://unleash.nais.io/api/", APPLICATION_NAME);
     }
 
 }
