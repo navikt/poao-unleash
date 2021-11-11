@@ -1,2 +1,2 @@
-FROM docker.pkg.github.com/navikt/pus-nais-java-app/pus-nais-java-app:java11
+FROM ghcr.io/navikt/poao-baseimages/java:11
 COPY /target/pto-unleash.jar app.jar
