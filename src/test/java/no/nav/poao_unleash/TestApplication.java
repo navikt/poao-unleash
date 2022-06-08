@@ -1,4 +1,4 @@
-package no.nav.pto_unleash;
+package no.nav.poao_unleash;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

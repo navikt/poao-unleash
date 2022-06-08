@@ -1,4 +1,4 @@
-package no.nav.pto_unleash;
+package no.nav.poao_unleash;
 
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;

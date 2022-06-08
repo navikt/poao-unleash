@@ -2,7 +2,7 @@ name: Build, push and deploy
 on: push
 env:
   IMAGE_TAG: ${{ github.sha }}
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/pto-unleash
+  IMAGE: ghcr.io/navikt/poao-unleash/poao-unleash
   PRINT_PAYLOAD: true
 jobs:
   test:
@@ -89,7 +89,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: .nais/nais.yaml
+          RESOURCE: .nais/nais-prod.yaml
           VAR: version=${{ env.IMAGE_TAG }}
       - name: Create release
         uses: actions/create-release@v1

@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>no.nav</groupId>
-    <artifactId>pto-unleash</artifactId>
+    <artifactId>poao-unleash</artifactId>
     <version>1</version>
-    <name>pto-unleash</name>
-    <description>Eksponerer unleash for frontendapplikasjoner med PTO strategier</description>
+    <name>poao-unleash</name>
+    <description>Felles tjeneste for å gjøre kall mot unleash med tilpassede strategier</description>
 
     <properties>
         <java.version>11</java.version>
@@ -29,7 +29,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>pto-unleash</finalName>
+        <finalName>poao-unleash</finalName>
     </build>
 
     <dependencies>

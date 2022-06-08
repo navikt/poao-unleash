@@ -1,4 +1,4 @@
-package no.nav.pto_unleash;
+package no.nav.poao_unleash;
 
 import no.nav.common.featuretoggle.UnleashClient;
 import no.nav.common.featuretoggle.UnleashClientImpl;
@@ -23,6 +23,7 @@ public class ApplicationConfig {
 
     @Bean
     public UnleashClient unleashClient() {
+        // TODO: Hent URL til unleash gjennom properties
         return new UnleashClientImpl("https://unleash.nais.io/api/", APPLICATION_NAME);
     }
 
