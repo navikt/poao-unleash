@@ -1,15 +1,13 @@
 kind: Application
 apiVersion: nais.io/v1alpha1
 metadata:
-  name: pto-unleash
-  namespace: pto
+  name: poao-unleash
+  namespace: poao
   labels:
-    team: pto
+    team: poao
 spec:
   image: docker.pkg.github.com/navikt/pto-unleash/pto-unleash:{{version}}
   port: 8080
-  ingresses:
-    - https://pto-unleash.dev.adeo.no
   prometheus:
     enabled: true
     path: /internal/prometheus
@@ -30,4 +28,3 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
-

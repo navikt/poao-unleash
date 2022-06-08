@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
 
-    private final String APPLICATION_NAME = "pto-unleash";
+    private final String APPLICATION_NAME = "poao-unleash";
 
     @Bean
     public FilterRegistrationBean<SetStandardHttpHeadersFilter> setStandardHttpHeadersFilter() {

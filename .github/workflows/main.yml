@@ -64,8 +64,8 @@ jobs:
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
-          RESOURCE: nais-dev.yaml
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/nais-dev.yaml
           VAR: version=${{ env.IMAGE_TAG }}
       - name: Create release
         uses: actions/create-release@v1
@@ -88,8 +88,8 @@ jobs:
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-fss
-          RESOURCE: nais.yaml
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/nais.yaml
           VAR: version=${{ env.IMAGE_TAG }}
       - name: Create release
         uses: actions/create-release@v1
