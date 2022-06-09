@@ -28,4 +28,10 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  accessPolicy:
+    inbound:
+      rules:
+        - application: veilarbpersonflate
+          namespace: poao
+          cluster: prod-gcp
 
