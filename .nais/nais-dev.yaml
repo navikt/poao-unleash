@@ -34,3 +34,6 @@ spec:
         - application: veilarbpersonflate
           namespace: poao
           cluster: dev-gcp
+        - application: veilarbportefoljeflatefs
+          namespace: obo
+          cluster: dev-gcp
