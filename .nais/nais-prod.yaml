@@ -1,0 +1,40 @@
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: poao-unleash
+  namespace: poao
+  labels:
+    team: poao
+spec:
+  image: ghcr.io/navikt/poao-unleash/poao-unleash:{{version}}
+  port: 8080
+  prometheus:
+    enabled: true
+    path: /internal/prometheus
+  liveness:
+    path: /internal/health/liveness
+    initialDelay: 30
+  readiness:
+    path: /internal/health/readiness
+    initialDelay: 30
+  replicas:
+    min: 2
+    max: 3
+    cpuThresholdPercentage: 75
+  resources:
+    limits:
+      cpu: "1"
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  accessPolicy:
+    inbound:
+      rules:
+        - application: veilarbpersonflate
+          namespace: poao
+          cluster: prod-gcp
+        - application: veilarbportefoljeflatefs
+          namespace: obo
+          cluster: prod-gcp
+
