@@ -5,6 +5,7 @@ import no.nav.common.featuretoggle.UnleashClient;
 import no.nav.common.featuretoggle.UnleashClientImpl;
 import no.nav.common.rest.filter.SetStandardHttpHeadersFilter;
 import no.nav.poao_unleash.auth.TokenValidator;
+import no.nav.poao_unleash.auth.TokenValidatorImpl;
 import no.nav.poao_unleash.auth.discovery.OidcDiscoveryConfigurationClient;
 import no.nav.poao_unleash.config.EnvironmentProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -37,7 +38,7 @@ public class ApplicationConfig {
     public TokenValidator tokenValidator(EnvironmentProperties environmentProperties) {
         OidcDiscoveryConfigurationClient oidcClient = new OidcDiscoveryConfigurationClient();
         OidcDiscoveryConfiguration oidcDiscoveryConfiguration = oidcClient.fetchDiscoveryConfiguration(environmentProperties.getAzureAdDiscoveryUrl());
-        return new TokenValidator(environmentProperties.getAzureAdClientId(), oidcDiscoveryConfiguration);
+        return new TokenValidatorImpl(environmentProperties.getAzureAdClientId(), oidcDiscoveryConfiguration);
     }
 
 }
