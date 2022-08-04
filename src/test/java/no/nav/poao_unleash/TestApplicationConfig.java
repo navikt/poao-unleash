@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.mock;
 
 @Configuration
@@ -22,8 +24,8 @@ public class TestApplicationConfig {
     public TokenValidator tokenValidator() {
         return new TokenValidator() {
             @Override
-            public IDTokenClaimsSet validate(String token) {
-                return null;
+            public Optional<IDTokenClaimsSet> validate(String token) {
+                return Optional.empty();
             }
         };
     }
