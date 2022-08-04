@@ -1,17 +1,26 @@
 package no.nav.poao_unleash;
 
 import no.nav.common.auth.oidc.discovery.OidcDiscoveryConfiguration;
+import no.nav.common.client.axsys.AxsysClient;
+import no.nav.common.client.axsys.AxsysClientImpl;
+import no.nav.common.client.axsys.AxsysV2ClientImpl;
+import no.nav.common.client.axsys.CachedAxsysClient;
 import no.nav.common.featuretoggle.UnleashClient;
 import no.nav.common.featuretoggle.UnleashClientImpl;
 import no.nav.common.rest.filter.SetStandardHttpHeadersFilter;
+import no.nav.common.token_client.builder.AzureAdTokenClientBuilder;
+import no.nav.common.token_client.client.AzureAdMachineToMachineTokenClient;
 import no.nav.poao_unleash.auth.TokenValidator;
 import no.nav.poao_unleash.auth.TokenValidatorImpl;
 import no.nav.poao_unleash.auth.discovery.OidcDiscoveryConfigurationClient;
 import no.nav.poao_unleash.config.EnvironmentProperties;
+import no.nav.poao_unleash.strategies.ByEnhetStrategy;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties({EnvironmentProperties.class})
@@ -29,9 +38,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public UnleashClient unleashClient() {
-        // TODO: Hent URL til unleash gjennom properties
-        return new UnleashClientImpl("https://unleash.nais.io/api/", APPLICATION_NAME);
+    public UnleashClient unleashClient(EnvironmentProperties environmentProperties, ByEnhetStrategy byEnhetStrategy) {
+        return new UnleashClientImpl(environmentProperties.getUnleashUrl(), APPLICATION_NAME, List.of(byEnhetStrategy));
     }
 
     @Bean
@@ -41,4 +49,16 @@ public class ApplicationConfig {
         return new TokenValidatorImpl(environmentProperties.getAzureAdClientId(), oidcDiscoveryConfiguration);
     }
 
+    @Bean
+    public AxsysClient axsysClient(EnvironmentProperties environmentProperties, AzureAdMachineToMachineTokenClient azureAdMachineToMachineTokenClient) {
+        AxsysClient axsysClient = new AxsysV2ClientImpl(environmentProperties.getAxsysUrl(), () -> azureAdMachineToMachineTokenClient.createMachineToMachineToken(environmentProperties.getAxsysScope()));
+        return new CachedAxsysClient(axsysClient);
+    }
+
+    @Bean
+    public AzureAdMachineToMachineTokenClient azureAdMachineToMachineTokenClient() {
+        return AzureAdTokenClientBuilder.builder()
+                .withNaisDefaults()
+                .buildMachineToMachineTokenClient();
+    }
 }

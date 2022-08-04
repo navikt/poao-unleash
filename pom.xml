@@ -78,6 +78,16 @@
             <artifactId>util</artifactId>
             <version>${common.version}</version>
         </dependency>
+        <dependency>
+            <groupId>no.nav.common</groupId>
+            <artifactId>client</artifactId>
+            <version>${common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.common</groupId>
+            <artifactId>token-client</artifactId>
+            <version>${common.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.nimbusds</groupId>

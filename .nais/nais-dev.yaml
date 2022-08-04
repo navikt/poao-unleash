@@ -43,3 +43,11 @@ spec:
         - application: veilarbportefoljeflatefs
           namespace: obo
           cluster: dev-gcp
+
+  env:
+    - name: AXSYS_URL
+      value: https://axsys.dev-fss-pub.nais.io
+    - name: AXSYS_SCOPE
+      value: api://dev-fss.org.axsys/.default
+    - name: UNLEASH_URL
+      value: https://unleash.nais.io/api/
