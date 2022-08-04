@@ -1,18 +1,24 @@
 package no.nav.poao_unleash.auth;
 
 
+import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
+import com.nimbusds.jose.proc.BadJOSEException;
 import com.nimbusds.jwt.JWTParser;
 import com.nimbusds.oauth2.sdk.id.ClientID;
 import com.nimbusds.oauth2.sdk.id.Issuer;
 import com.nimbusds.openid.connect.sdk.claims.IDTokenClaimsSet;
 import com.nimbusds.openid.connect.sdk.validators.IDTokenValidator;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import no.nav.common.auth.oidc.discovery.OidcDiscoveryConfiguration;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.Optional;
 
+@Slf4j
 public class TokenValidatorImpl implements TokenValidator {
     private final IDTokenValidator validator;
     private final static JWSAlgorithm JWS_ALGORITHM = JWSAlgorithm.RS256;
@@ -21,9 +27,13 @@ public class TokenValidatorImpl implements TokenValidator {
         this.validator = createValidator(oidcConfiguration.issuer, oidcConfiguration.jwksUri, JWS_ALGORITHM, clientId);
     }
 
-    @SneakyThrows
-    public IDTokenClaimsSet validate(String token) {
-        return this.validator.validate(JWTParser.parse(token), null);
+    public Optional<IDTokenClaimsSet> validate(String token) {
+        try {
+            return Optional.of(this.validator.validate(JWTParser.parse(token), null));
+        } catch (Exception e) {
+            log.error("Klarte ikker parse token", e);
+            return Optional.empty();
+        }
     }
 
     private static IDTokenValidator createValidator(String issuerUrl, String jwksUrl, JWSAlgorithm algorithm, String clientId) {
