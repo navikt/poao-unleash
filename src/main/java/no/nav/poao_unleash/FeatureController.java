@@ -41,7 +41,8 @@ public class FeatureController {
             HttpServletResponse response
     ) {
 
-        Optional<String> maybeNavident = Optional.ofNullable(request.getHeader("Authorization")).map(tokenValidator::validate)
+        Optional<String> maybeNavident = Optional.ofNullable(request.getHeader("Authorization"))
+                .flatMap(tokenValidator::validate)
                 .map(claims -> claims.getStringClaim(AAD_NAV_IDENT_CLAIM));
 
         String sessionId = getCookie(UNLEASH_SESSION_ID_COOKIE_NAME, request)

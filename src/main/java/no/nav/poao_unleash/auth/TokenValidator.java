@@ -2,7 +2,9 @@ package no.nav.poao_unleash.auth;
 
 import com.nimbusds.openid.connect.sdk.claims.IDTokenClaimsSet;
 
+import java.util.Optional;
+
 public interface TokenValidator {
-    IDTokenClaimsSet validate(String token);
+    Optional<IDTokenClaimsSet> validate(String token);
 
 }
