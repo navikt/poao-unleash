@@ -28,6 +28,12 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  azure:
+    application:
+      enabled: true
+      claims:
+        extra:
+          - "NAVident"
   accessPolicy:
     inbound:
       rules:
@@ -37,4 +43,3 @@ spec:
         - application: veilarbportefoljeflatefs
           namespace: obo
           cluster: prod-gcp
-
