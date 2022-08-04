@@ -28,6 +28,12 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  azure:
+    application:
+      enabled: true
+      claims:
+        extra:
+          - "NAVident"
   accessPolicy:
     inbound:
       rules:
