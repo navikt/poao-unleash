@@ -14,6 +14,8 @@ import no.nav.poao_unleash.auth.TokenValidator;
 import no.nav.poao_unleash.auth.TokenValidatorImpl;
 import no.nav.poao_unleash.auth.discovery.OidcDiscoveryConfigurationClient;
 import no.nav.poao_unleash.config.EnvironmentProperties;
+import no.nav.poao_unleash.env.NaisEnv;
+import no.nav.poao_unleash.strategies.ByEnhetAndEnvironmentStrategy;
 import no.nav.poao_unleash.strategies.ByEnhetStrategy;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -38,8 +40,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public UnleashClient unleashClient(EnvironmentProperties environmentProperties, ByEnhetStrategy byEnhetStrategy) {
-        return new UnleashClientImpl(environmentProperties.getUnleashUrl(), APPLICATION_NAME, List.of(byEnhetStrategy));
+    public UnleashClient unleashClient(EnvironmentProperties environmentProperties, ByEnhetStrategy byEnhetStrategy, ByEnhetAndEnvironmentStrategy byEnhetAndEnvironmentStrategy) {
+        return new UnleashClientImpl(environmentProperties.getUnleashUrl(), APPLICATION_NAME, List.of(byEnhetStrategy, byEnhetAndEnvironmentStrategy));
     }
 
     @Bean
@@ -60,5 +62,10 @@ public class ApplicationConfig {
         return AzureAdTokenClientBuilder.builder()
                 .withNaisDefaults()
                 .buildMachineToMachineTokenClient();
+    }
+
+    @Bean
+    public NaisEnv naisEnv() {
+        return new NaisEnv();
     }
 }

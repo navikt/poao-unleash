@@ -42,7 +42,13 @@ public class FeatureController {
     ) {
 
         Optional<String> maybeNavident = Optional.ofNullable(request.getHeader("Authorization"))
-                .map(authHeader -> authHeader.split(" ")[1])
+                .map(authHeader -> {
+                    String[] parts = authHeader.split(" ");
+                    if(parts.length > 1) {
+                        return parts[1];
+                    }
+                    return null;
+                })
                 .flatMap(tokenValidator::validate)
                 .map(claims -> claims.getStringClaim(AAD_NAV_IDENT_CLAIM));
 
