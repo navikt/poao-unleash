@@ -28,6 +28,12 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  azure:
+    application:
+      enabled: true
+      claims:
+        extra:
+          - "NAVident"
   accessPolicy:
     inbound:
       rules:
@@ -37,4 +43,10 @@ spec:
         - application: veilarbportefoljeflatefs
           namespace: obo
           cluster: prod-gcp
-
+  env:
+    - name: AXSYS_URL
+      value: https://axsys.prod-fss-pub.nais.io
+    - name: AXSYS_SCOPE
+      value: api://prod-fss.org.axsys/.default
+    - name: UNLEASH_URL
+      value: https://unleash.nais.io/api/
