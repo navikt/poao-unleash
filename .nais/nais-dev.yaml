@@ -43,6 +43,9 @@ spec:
         - application: veilarbportefoljeflatefs
           namespace: obo
           cluster: dev-gcp
+        - application: mulighetsrommet-veileder-flate
+          namespace: team-mulighetsrommet
+          cluster: dev-gcp
 
   env:
     - name: AXSYS_URL

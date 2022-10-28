@@ -43,6 +43,10 @@ spec:
         - application: veilarbportefoljeflatefs
           namespace: obo
           cluster: prod-gcp
+        - application: mulighetsrommet-veileder-flate
+          namespace: team-mulighetsrommet
+          cluster: prod-gcp
+        
   env:
     - name: AXSYS_URL
       value: https://axsys.prod-fss-pub.nais.io
