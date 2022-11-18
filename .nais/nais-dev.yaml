@@ -46,6 +46,9 @@ spec:
         - application: mulighetsrommet-veileder-flate
           namespace: team-mulighetsrommet
           cluster: dev-gcp
+        - application: mr-admin-flate
+          namespace: team-mulighetsrommet
+          cluster: dev-gcp
 
   env:
     - name: AXSYS_URL
