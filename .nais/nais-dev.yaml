@@ -49,6 +49,9 @@ spec:
         - application: mr-admin-flate
           namespace: team-mulighetsrommet
           cluster: dev-gcp
+        - application: amt-tiltaksarrangor-flate
+          namespace: amt
+          cluster: dev-gcp
 
   env:
     - name: AXSYS_URL
