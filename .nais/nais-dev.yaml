@@ -30,6 +30,7 @@ spec:
       memory: 512Mi
   azure:
     application:
+      allowAllUsers: true
       enabled: true
       claims:
         extra:
