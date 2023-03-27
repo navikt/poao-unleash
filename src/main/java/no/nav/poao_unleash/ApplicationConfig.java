@@ -2,7 +2,6 @@ package no.nav.poao_unleash;
 
 import no.nav.common.auth.oidc.discovery.OidcDiscoveryConfiguration;
 import no.nav.common.client.axsys.AxsysClient;
-import no.nav.common.client.axsys.AxsysClientImpl;
 import no.nav.common.client.axsys.AxsysV2ClientImpl;
 import no.nav.common.client.axsys.CachedAxsysClient;
 import no.nav.common.featuretoggle.UnleashClient;
