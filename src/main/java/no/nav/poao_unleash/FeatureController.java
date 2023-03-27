@@ -1,5 +1,8 @@
 package no.nav.poao_unleash;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import no.finn.unleash.UnleashContext;
 import no.nav.common.featuretoggle.UnleashClient;
@@ -10,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static no.nav.common.auth.Constants.*;
+import static no.nav.common.auth.Constants.AAD_NAV_IDENT_CLAIM;
 import static no.nav.common.auth.utils.CookieUtils.getCookie;
 
 @Slf4j
