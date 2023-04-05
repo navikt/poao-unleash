@@ -53,6 +53,9 @@ spec:
         - application: amt-tiltaksarrangor-flate
           namespace: amt
           cluster: dev-gcp
+    outbound:
+      external:
+        - host: axsys.dev-fss-pub.nais.io
 
   env:
     - name: AXSYS_URL
