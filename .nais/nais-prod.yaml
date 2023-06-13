@@ -53,6 +53,9 @@ spec:
         - application: amt-tiltaksarrangor-flate
           namespace: amt
           cluster: prod-gcp
+        - application: aktivitetsplan
+          namespace: pto
+          cluster: prod-gcp
     outbound:
       external:
         - host: axsys.prod-fss-pub.nais.io
